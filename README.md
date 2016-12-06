@@ -1,2 +1,2 @@
-# Benchmark
-Performance testing for different techniques
+Code techniques benchmarking
+===============
