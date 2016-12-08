@@ -1,18 +1,29 @@
 'use strict';
 
-const LOOP = 10000000;
+const COUNT = 10000000;
+const RETRY = 1;
 
-for (let k = 0; k < 3; k++) {
-  test(defineObject);
-  test(newInstance);
-  test(callFactory);
+var tests = [
+  defineObject,
+  mixinObject,
+  newInstance,
+  newObject,
+  objectCreate,
+  callFactory
+];
+
+for (let k = 0; k < RETRY; k++) {
+  //tests.sort(function() {
+  //  return Math.random() - 0.5;
+  //});
+  tests.map(test);
   console.log('---');
 }
 
 function test(fn) {
   console.time(fn.name);
   let a = [];
-  for (let i = 0; i < LOOP; i++) {
+  for (let i = 0; i < COUNT; i++) {
     a.push(fn());
   }
   fn();
@@ -27,6 +38,14 @@ function defineObject() {
   };
 }
 
+function mixinObject() {
+  var obj = {};
+  obj.hello = 'world';
+  obj.size = 100500;
+  obj.flag = true;
+  return obj;
+}
+
 function newInstance() {
   return new Item(
     'world',
@@ -34,6 +53,22 @@ function newInstance() {
     true
   );
 }
+
+function newObject() {
+  var obj = new Object();
+  obj.hello = 'world';
+  obj.size = 100500;
+  obj.flag = true;
+  return obj;
+}
+
+function objectCreate() {
+  var obj = Object.create(objectCreate.prototype);
+  obj.hello = 'world';
+  obj.size = 100500;
+  obj.flag = true;
+  return obj;
+};
 
 function callFactory() {
   return item(
