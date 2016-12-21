@@ -1,9 +1,8 @@
 'use strict';
 
-const COUNT = 10000000;
-const RETRY = 3;
+const benchmark = require('./2-benchmark.js');
 
-var tests = [
+benchmark.do(10000000, 3, [
   defineObject,
   defineArray,
   mixinObject,
@@ -11,30 +10,7 @@ var tests = [
   newObject,
   objectCreate,
   callFactory
-];
-
-for (let k = 0; k < RETRY; k++) {
-  //tests.sort(function() {
-  //  return Math.random() - 0.5;
-  //});
-  tests.map(test);
-  console.log('---');
-}
-
-function test(fn) {
-  let begin = process.hrtime();
-  console.time(fn.name);
-  let a = [];
-  for (let i = 0; i < COUNT; i++) {
-    a.push(fn());
-  }
-  fn();
-  let end = process.hrtime(begin);
-  let diff = end[0] * 1e9 + end[1];
-  let prefix = Array(15 - (diff.toString()).length).join(' ');
-  let suffix = Array(30 - fn.name.length).join(' ');
-  console.log(fn.name + suffix + prefix + diff + ' nanoseconds');
-}
+]);
 
 function defineArray() {
   return [

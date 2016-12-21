@@ -1,14 +1,10 @@
-const COUNT = 10000000;
-const RETRY = 3;
+'use strict';
 
-var tests = [
-  filterObjects,
-  filterArrays
-];
+const benchmark = require('./2-benchmark.js');
 
 // Define Data Source
 
-var data1 = [
+let data1 = [
   { name: 'Marcus Aurelius', birth: new Date('212-04-26'), city: 'Rome' },
   { name: 'Victor Glushkov', birth: new Date('1923-08-24'), city: 'Rostov on Don' },
   { name: 'Ibn Arabi', birth: new Date('1165-11-16'), city: 'Murcia' },
@@ -17,11 +13,11 @@ var data1 = [
 ];
 
 let data2 = [
-  ['Marcus Aurelius','212-04-26','Rome'],
-  ['Victor Glushkov','1923-08-24','Rostov on Don'],
-  ['Ibn Arabi','1165-11-16','Murcia'],
-  ['Mao Zedong','1893-12-26','Shaoshan'],
-  ['Rene Descartes','1596-03-31','La Haye en Touraine']
+  ['Marcus Aurelius', '212-04-26', 'Rome'],
+  ['Victor Glushkov', '1923-08-24', 'Rostov on Don'],
+  ['Ibn Arabi', '1165-11-16', 'Murcia'],
+  ['Mao Zedong', '1893-12-26', 'Shaoshan'],
+  ['Rene Descartes', '1596-03-31', 'La Haye en Touraine']
 ];
 
 let metadata = {
@@ -33,6 +29,8 @@ let metadata = {
     return Math.floor(difference / 31536000000);
   }
 };
+
+// Prepare prototype
 
 function Person() {}
 
@@ -59,36 +57,23 @@ function buildGetter(proto, fieldName, fieldType, fieldIndex) {
   }
 }
 
+data2.forEach(person => person.__proto__ = Person.prototype);
+
+// Define query
+
 let query = (person) => (
   person.name !== '' &&
   person.age > 18 &&
   person.city === 'Rome'
 );
 
-for (let k = 0; k < RETRY; k++) {
-  //tests.sort(function() {
-  //  return Math.random() - 0.5;
-  //});
-  tests.map(test);
-  console.log('---');
-}
+// Execute tests
 
-function test(fn) {
-  console.time(fn.name);
-  let a = [];
-  for (let i = 0; i < COUNT; i++) {
-    a.push(fn());
+benchmark.do(100000, 3, [
+  function filterObjects() {
+    data1.filter(query);
+  },
+  function filterArrays() {
+    data2.filter(query);
   }
-  fn();
-  console.timeEnd(fn.name);
-}
-
-
-data2.forEach(person => person.__proto__ = Person.prototype);
-
-let res = data.filter(query);
-console.dir(res);
-
-
-
-
+]);
