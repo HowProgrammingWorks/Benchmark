@@ -29,7 +29,7 @@ function defineObject() {
 }
 
 function mixinObject() {
-  var obj = {};
+  const obj = {};
   obj.hello = 'world';
   obj.size = 100500;
   obj.flag = true;
@@ -45,7 +45,7 @@ function newInstance() {
 }
 
 function newObject() {
-  var obj = new Object();
+  const obj = new Object();
   obj.hello = 'world';
   obj.size = 100500;
   obj.flag = true;
@@ -53,7 +53,7 @@ function newObject() {
 }
 
 function objectCreate() {
-  var obj = Object.create(objectCreate.prototype);
+  const obj = Object.create(objectCreate.prototype);
   obj.hello = 'world';
   obj.size = 100500;
   obj.flag = true;

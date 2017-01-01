@@ -6,7 +6,7 @@ module.exports = benchmark;
 benchmark.do = (count, retry, tests) => {
 
   for (let k = 0; k < retry; k++) {
-    //tests.sort(function() {
+    //tests.sort(() => {
     //  return Math.random() - 0.5;
     //});
     tests.map(test);
