@@ -20,7 +20,7 @@ function rangePush(min, max) {
 
 function rangeNew(from, to) {
   if (to < from) return [];
-  let len = to - from + 1;
+  const len = to - from + 1;
   const range = new Array(len);
   let i;
   for (i = from; i <= to; i++) {
@@ -30,10 +30,10 @@ function rangeNew(from, to) {
 }
 
 function rangeEx(range) {
-  let from, to, toType, count, res;
-  from = range[0];
-  to = range[1];
-  toType = typeof(to);
+  const from = range[0];
+  let to = range[1];
+  const toType = typeof(to);
+  let count, res;
   if (toType === 'undefined') {
     to = range[2];
     res = api.common.range(from, to);

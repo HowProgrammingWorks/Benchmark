@@ -2,9 +2,9 @@
 
 const benchmark = require('./2-benchmark.js');
 
-let fnLambda = () => {};
+const fnLambda = () => {};
 
-let fnExpression = function() {
+const fnExpression = function() {
 };
 
 function fnDeclaration() {

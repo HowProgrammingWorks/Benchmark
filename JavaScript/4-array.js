@@ -4,15 +4,25 @@ const benchmark = require('./2-benchmark.js');
 
 // Define Data Source
 
-let data1 = [
-  { name: 'Marcus Aurelius', birth: new Date('212-04-26'), city: 'Rome' },
-  { name: 'Victor Glushkov', birth: new Date('1923-08-24'), city: 'Rostov on Don' },
-  { name: 'Ibn Arabi', birth: new Date('1165-11-16'), city: 'Murcia' },
-  { name: 'Mao Zedong', birth: new Date('1893-12-26'), city: 'Shaoshan' },
-  { name: 'Rene Descartes', birth: new Date('1596-03-31'), city: 'La Haye en Touraine' }
+const data1 = [
+  { name: 'Marcus Aurelius',
+    birth: new Date('212-04-26'),
+    city: 'Rome' },
+  { name: 'Victor Glushkov',
+    birth: new Date('1923-08-24'),
+    city: 'Rostov on Don' },
+  { name: 'Ibn Arabi',
+    birth: new Date('1165-11-16'),
+    city: 'Murcia' },
+  { name: 'Mao Zedong',
+    birth: new Date('1893-12-26'),
+    city: 'Shaoshan' },
+  { name: 'Rene Descartes',
+    birth: new Date('1596-03-31'),
+    city: 'La Haye en Touraine' }
 ];
 
-let data2 = [
+const data2 = [
   ['Marcus Aurelius', '212-04-26', 'Rome'],
   ['Victor Glushkov', '1923-08-24', 'Rostov on Don'],
   ['Ibn Arabi', '1165-11-16', 'Murcia'],
@@ -20,12 +30,12 @@ let data2 = [
   ['Rene Descartes', '1596-03-31', 'La Haye en Touraine']
 ];
 
-let metadata = {
+const metadata = {
   name: 'string',
   birth: 'Date',
   city: 'string',
-  age: function() {
-    let difference = new Date() - this.birth;
+  age() {
+    const difference = new Date() - this.birth;
     return Math.floor(difference / 31536000000);
   }
 };
@@ -35,14 +45,14 @@ let metadata = {
 function Person() {}
 
 let index = 0;
-for (let name in metadata) {
+for (const name in metadata) {
   buildGetter(Person.prototype, name, metadata[name], index++);
 }
 
 function buildGetter(proto, fieldName, fieldType, fieldIndex) {
   if (fieldType === 'Date') {
     Object.defineProperty(proto, fieldName, {
-      get: function() {
+      get() {
         return new Date(this[fieldIndex]);
       }
     });
@@ -50,7 +60,7 @@ function buildGetter(proto, fieldName, fieldType, fieldIndex) {
     Object.defineProperty(proto, fieldName, { get: fieldType });
   } else {
     Object.defineProperty(proto, fieldName, {
-      get: function() {
+      get() {
         return this[fieldIndex];
       }
     });
@@ -61,7 +71,7 @@ data2.forEach(person => person.__proto__ = Person.prototype);
 
 // Define query
 
-let query = (person) => (
+const query = (person) => (
   person.name !== '' &&
   person.age > 18 &&
   person.city === 'Rome'

@@ -24,12 +24,31 @@ function testLetForIn() {
 function testForInLet() {
   const a = Array(7);
   let i = 0;
-  for (let key in data) {
+  for (const key in data) {
     a[i++] = key;
+  }
+}
+
+function testLetForOf() {
+  const a = Array(7);
+  let i = 0;
+  let val;
+  for (val of data) {
+    a[i++] = val;
+  }
+}
+
+function testForOfLet() {
+  const a = Array(7);
+  let i = 0;
+  for (const val of data) {
+    a[i++] = val;
   }
 }
 
 benchmark.do(10000000, 5, [
   testLetForIn,
   testForInLet,
+  testLetForOf,
+  testForOfLet,
 ]);

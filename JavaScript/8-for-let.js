@@ -2,9 +2,6 @@
 
 const benchmark = require('./2-benchmark.js');
 
-const data = ['abc', 'defg', 'hijklmn', 'opqrst', 'u', 'v', 'xyz'];
-
-
 function testLetFor() {
   const a = Array(1000);
   let i;

@@ -76,8 +76,8 @@ function Item(hello, size, flag) {
 
 function item(hello, size, flag) {
   return {
-    hello: hello,
-    size: size,
-    flag: flag
+    hello,
+    size,
+    flag
   };
 }
