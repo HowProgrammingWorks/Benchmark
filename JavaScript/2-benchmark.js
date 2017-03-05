@@ -20,9 +20,7 @@ benchmark.do = (count, retry, tests) => {
     }
     const end = process.hrtime(begin);
     const diff = end[0] * 1e9 + end[1];
-    const prefix = Array(15 - (diff.toString()).length).join('.');
-    const suffix = Array(20 - fn.name.length).join('.');
-    console.log(fn.name + suffix + prefix + diff + ' nanoseconds');
+    const prefix = '.'.repeat(35 - (diff + fn.name).length);
+    console.log(fn.name + prefix + diff + ' nanoseconds');
   }
-
 };
