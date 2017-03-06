@@ -1,7 +1,6 @@
 'use strict';
 
 const benchmark = require('./2-benchmark.js');
-
 const dogNames = ['Jack', 'Toby', 'Oscar'];
 
 
