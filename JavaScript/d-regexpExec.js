@@ -7,17 +7,16 @@ const str = 'Lorem Ipsum is simply dummy text of the printing and typesetting';
 function testIndexOf() {
   const target = 'i';
   let pos = -1;
-  while ((pos = str.indexOf(target, pos + 1)) !== -1) {
-    //console.log(str[pos]);
+  do {
+    pos = str.indexOf(target, pos + 1);
   }
+  while (pos !== -1);
 }
 
 function testRegexpExec() {
   const regexp = /i/g;
   let result = regexp.exec(str);
-
   while (result) {
-		//console.log(result[0]);
     result = regexp.exec(str);
   }
 }
