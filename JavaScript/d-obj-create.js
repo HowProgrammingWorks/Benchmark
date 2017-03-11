@@ -6,7 +6,7 @@ module.exports = creaters;
 creaters.arraySize = 1000; // Size of arrays in tests
 
 // Create array that consist of arraySize elements using mixins
-creaters.mixinCreate = () => {
+creaters.mixinCreate = function mixinCreate() {
 
   // Function for adding properties and funсtions to object
   const extend = (obj, mixin) => (
@@ -46,7 +46,7 @@ creaters.mixinCreate = () => {
 };
 
 // Create array that consist of arraySize elements using classes
-creaters.classCreate = () => {
+creaters.classCreate = function classCreate() {
 
   // Creating class
   class SomeClass {
@@ -83,7 +83,7 @@ creaters.classCreate = () => {
 };
 
 // Create array that consist of arraySize elements using prototypes
-creaters.prototypeCreate = () => {
+creaters.prototypeCreate = function prototypeCreate() {
 
   // Creating class
   const Creater = function() {
@@ -118,7 +118,7 @@ creaters.prototypeCreate = () => {
 };
 
 // Create array that consist of arraySize elements using closures
-creaters.closureCreate = () => {
+creaters.closureCreate = function closureCreate() {
 
   // Creating closure
   const Closure = () => {
@@ -152,3 +152,15 @@ creaters.closureCreate = () => {
 
   return array;
 };
+
+// Testing
+if (module.parent === null) {
+  const benchmark = require('./2-benchmark.js');
+  console.log('Creation + using arrays. Size = ' + creaters.arraySize + ':\n');
+  benchmark.do(1000, 3, [
+    creaters.mixinCreate,
+    creaters.classCreate,
+    creaters.prototypeCreate,
+    creaters.closureCreate
+  ]);
+}

@@ -1,7 +1,7 @@
 'use strict';
 
 const benchmark = require('./2-benchmark.js');
-const creaters = require('./c-obj-create.js');
+const creaters = require('./d-obj-create.js');
 
 function actions(array) {
   let i;
