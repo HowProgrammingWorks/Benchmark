@@ -2,13 +2,11 @@
 
 const benchmark = require('./2-benchmark.js');
 
-
 function testConcat() {
   let arr1 = [1, 2, 3],  arr2 = [4, 5, 6];
   arr1 = arr1.concat(arr2);
   return arr1;
 }
-
 
 function testPushApply() {
   let arr1 = [1, 2, 3],  arr2 = [4, 5, 6];
@@ -27,7 +25,6 @@ function testSpread() {
   arr1 = [...arr1, ...arr2];
   return arr1;
 }
-
 
 benchmark.do(1000000, 3, [
   testConcat,
