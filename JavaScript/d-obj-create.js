@@ -156,7 +156,7 @@ creaters.closureCreate = function closureCreate() {
 // Testing
 if (module.parent === null) {
   const benchmark = require('./2-benchmark.js');
-  console.log('Creation + using arrays. Size = ' + creaters.arraySize + ':\n');
+  console.log('Creating arrays. Size = ' + creaters.arraySize + ':\n');
   benchmark.do(1000, 3, [
     creaters.mixinCreate,
     creaters.classCreate,
