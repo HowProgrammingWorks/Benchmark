@@ -9,8 +9,7 @@ function testIndexOf() {
   let pos = -1;
   do {
     pos = str.indexOf(target, pos + 1);
-  }
-  while (pos !== -1);
+  } while (~pos);
 }
 
 function testRegexpExec() {
