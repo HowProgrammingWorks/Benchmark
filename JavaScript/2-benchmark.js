@@ -3,16 +3,16 @@
 const benchmark = {};
 module.exports = benchmark;
 
-benchmark.do = (count, retry, tests, namesOfTests) => {
+benchmark.do = (count, retry, tests, testNames) => {
 
   let k;
   for (k = 0; k < retry; k++) {
-    let counter = 0; // Order number of function that will be call
+    let counter = 0;  // Function index which is called
     tests.map((fn) => test(fn, counter++));
     console.log();
   }
 
-  function test(fn, orderNumber) {
+  function test(fn, index) {
     const begin = process.hrtime();
     const a = [];
     let i;
@@ -22,8 +22,8 @@ benchmark.do = (count, retry, tests, namesOfTests) => {
     const end = process.hrtime(begin);
     const diff = end[0] * 1e9 + end[1];
 
-    const fromArray = namesOfTests && namesOfTests[orderNumber];
-    const fnName = fromArray || fn.name || 'Anonymius';
+    const explicitName = testNames && testNames[index];
+    const fnName = explicitName || fn.name || 'Anonymous';
     const prefix = '.'.repeat(35 - (diff + fnName).length);
 
     console.log(fnName + prefix + diff + ' nanoseconds');
