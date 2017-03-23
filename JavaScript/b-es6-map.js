@@ -10,6 +10,23 @@ cities.set('Beijing', { name: 'Пекин',  population: 11510000 });
 cities.set('Kiev',    { name: 'Киев',   population:  2804000 });
 cities.set('Riga',    { name: 'Рига',   population:   643615 });
 
+const citiesOld = {
+  Athens:  { name: 'Афины',  population:   664046 },
+  Rome:    { name: 'Рим',    population:  2627000 },
+  London:  { name: 'Лондон', population:  8674000 },
+  Beijing: { name: 'Пекин',  population: 11510000 },
+  Kiev:    { name: 'Киев',   population:  2804000 },
+  Riga:    { name: 'Рига',   population:   643615 }
+};
+
+function testForInHash() {
+  const arr = [];
+  let key;
+  for (key in citiesOld) {
+    arr.push([ citiesOld[key], key ]);
+  }
+}
+
 function testForEach() {
   const arr = [];
   cities.forEach((value, key) => {
@@ -46,6 +63,7 @@ function testForOfEntries() {
 }
 
 benchmark.do(1000000, 4, [
+  testForInHash,
   testForEach,
   testForOf,
   testForOfKeys,

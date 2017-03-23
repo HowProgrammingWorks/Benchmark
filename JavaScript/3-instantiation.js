@@ -2,9 +2,11 @@
 
 const benchmark = require('./2-benchmark.js');
 
-benchmark.do(10000000, 3, [
+benchmark.do(10000000, 5, [
   defineObject,
   defineArray,
+  defineArrayOfString,
+  defineArrayOfNumber,
   mixinObject,
   newInstance,
   newObject,
@@ -19,6 +21,23 @@ function defineArray() {
     true
   ];
 }
+
+function defineArrayOfString() {
+  return [
+    'world',
+    'world',
+    'world'
+  ];
+}
+
+function defineArrayOfNumber() {
+  return [
+    100500,
+    100500,
+    100500
+  ];
+}
+
 
 function defineObject() {
   return {
