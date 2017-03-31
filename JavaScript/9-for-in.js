@@ -23,7 +23,6 @@ function testForKeys() {
   }
 }
 
-
 function testForIn() {
   const a = Array(7);
   let i = 0;

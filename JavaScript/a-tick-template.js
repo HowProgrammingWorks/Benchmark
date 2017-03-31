@@ -7,7 +7,7 @@ function testConcat() {
 }
 
 function testTick() {
-  return `Hello user${parseInt('5') * 10}!`;
+  return `Hello user${parseInt('5') * 10} !`;
 }
 
 benchmark.do(10000000, 5, [

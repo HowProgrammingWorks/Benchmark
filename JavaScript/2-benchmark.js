@@ -9,6 +9,7 @@ benchmark.do = (count, retry, tests) => {
   for (k = 0; k < retry; k++) {
     tests.map(test);
     console.log();
+    if (global.gc) gc();
   }
 
   function test(fn) {
