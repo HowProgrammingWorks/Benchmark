@@ -64,7 +64,7 @@ function testForOfLet() {
   }
 }
 
-benchmark.do(1000000, 5, [
+benchmark.do(1000000, [
   testForKeys,
   testForIn,
   testForInLet,

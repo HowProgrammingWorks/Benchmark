@@ -20,7 +20,7 @@ function testIncludes() {
   ];
 }
 
-benchmark.do(10000000, 5, [
+benchmark.do(10000000, [
   testIncludes,
-  testIndexOf,
+  testIndexOf
 ]);

@@ -21,7 +21,7 @@ function fnDeclarationU() { return; }
 function fnDeclarationN() { return null; }
 function fnDeclaration0() { return 0; }
 
-benchmark.do(100000000, 3, [
+benchmark.do(10000000, [
   fnLambdaBlock,
   fnLambdaBlockU,
   fnLambdaBlockN,

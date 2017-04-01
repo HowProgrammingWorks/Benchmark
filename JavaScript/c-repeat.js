@@ -10,7 +10,7 @@ function testRepeat() {
   return '.'.repeat(20);
 }
 
-benchmark.do(1000000, 3, [
+benchmark.do(1000000, [
   testArrayJoin,
   testRepeat,
 ]);

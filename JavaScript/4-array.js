@@ -79,7 +79,7 @@ const query = (person) => (
 
 // Execute tests
 
-benchmark.do(100000, 3, [
+benchmark.do(1000000, [
   function filterObjects() {
     data1.filter(query);
   },

@@ -2,6 +2,14 @@
 
 const benchmark = require('./2-benchmark.js');
 
+function makeClosure(hello, size, flag) {
+  return () => {};
+}
+
+function closureInstance() {
+  return makeClosure('world', 100500, true);
+};
+
 function defineArray() {
   return ['world', 100500, true];
 }
@@ -76,7 +84,8 @@ function itemFactory(hello, size, flag) {
   return { hello, size, flag };
 }
 
-benchmark.do(10000000, 5, [
+benchmark.do(10000000, [
+  closureInstance,
   defineObject,
   defineArray,
   defineArrayOfString,

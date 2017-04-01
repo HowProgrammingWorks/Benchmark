@@ -62,7 +62,7 @@ function testForOfEntries() {
   }
 }
 
-benchmark.do(1000000, 4, [
+benchmark.do(1000000, [
   testForInHash,
   testForEach,
   testForOf,
