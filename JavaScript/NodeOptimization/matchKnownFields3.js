@@ -99,4 +99,4 @@ function testMatchKnownFields3() {
   ];
 }
 
-benchmark.do(10000000, 5, [testMatchKnownFields3]);
+benchmark.do(10000000, [testMatchKnownFields3]);

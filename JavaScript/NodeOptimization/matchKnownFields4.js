@@ -79,7 +79,7 @@ function fieldKnown(field) {
     case 'X-Forwarded-Proto':
     case 'x-forwarded-proto': return '\u0000x-forwarded-proto';
   }
-};
+}
 
 function lowerKnown(field) {
   switch (field) {
@@ -121,7 +121,7 @@ function lowerKnown(field) {
     case 'x-forwarded-host': return '\u0000x-forwarded-host';
     case 'x-forwarded-proto': return '\u0000x-forwarded-proto';
   }
-};
+}
 
 function matchKnownFields4(field) {
   let toLower;
@@ -146,4 +146,4 @@ function testMatchKnownFields4() {
   ];
 }
 
-benchmark.do(10000000, 5, [testMatchKnownFields4]);
+benchmark.do(10000000, [testMatchKnownFields4]);

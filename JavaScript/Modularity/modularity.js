@@ -49,7 +49,7 @@ function test3() {
   return d;
 }
 
-benchmark.do(100000000, 10, [
+benchmark.do(100000000, [
   test1,
   test2,
   test3
