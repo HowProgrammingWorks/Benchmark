@@ -25,7 +25,7 @@ console.dir(test1api);
 console.dir(test2api);
 console.dir(test3api);
 
-function test1() {
+function exportHash() {
   const a = test1api.moduleName.submodule1.first('Value');
   const b = test1api.moduleName.submodule1.second(a);
   const c = test1api.moduleName.submodule2.third(b);
@@ -33,7 +33,7 @@ function test1() {
   return d;
 }
 
-function test2() {
+function exportLink() {
   const a = test2api.moduleName.submodule1.first('Value');
   const b = test2api.moduleName.submodule1.second(a);
   const c = test2api.moduleName.submodule2.third(b);
@@ -41,7 +41,7 @@ function test2() {
   return d;
 }
 
-function test3() {
+function exportClosure() {
   const a = test3api.moduleName.first('Value');
   const b = test3api.moduleName.second(a);
   const c = test3api.moduleName.third(b);
@@ -50,7 +50,7 @@ function test3() {
 }
 
 benchmark.do(100000000, [
-  test1,
-  test2,
-  test3
+  exportHash,
+  exportLink,
+  exportClosure
 ]);
