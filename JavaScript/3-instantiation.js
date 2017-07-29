@@ -8,7 +8,7 @@ function makeClosure(hello, size, flag) {
 
 function closureInstance() {
   return makeClosure('world', 100500, true);
-};
+}
 
 function defineArray() {
   return ['world', 100500, true];
