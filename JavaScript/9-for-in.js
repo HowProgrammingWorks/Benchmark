@@ -23,7 +23,6 @@ function testForKeys() {
   }
 }
 
-
 function testForIn() {
   const a = Array(7);
   let i = 0;
@@ -65,7 +64,7 @@ function testForOfLet() {
   }
 }
 
-benchmark.do(1000000, 5, [
+benchmark.do(1000000, [
   testForKeys,
   testForIn,
   testForInLet,

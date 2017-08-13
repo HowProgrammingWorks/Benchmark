@@ -2,15 +2,6 @@
 
 const benchmark = require('./2-benchmark.js');
 
-benchmark.do(100000, 3, [
-  function testRangePush() {
-    rangePush(1, 1000);
-  },
-  function testRangeNew() {
-    rangeNew(1, 1000);
-  }
-]);
-
 function rangePush(min, max) {
   const arr = [];
   let i;
@@ -47,3 +38,12 @@ function rangeEx(range) {
   }
   return res;
 }
+
+benchmark.do(1000000, [
+  function testRangePush() {
+    rangePush(1, 1000);
+  },
+  function testRangeNew() {
+    rangeNew(1, 1000);
+  }
+]);

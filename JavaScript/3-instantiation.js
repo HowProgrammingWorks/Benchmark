@@ -2,22 +2,24 @@
 
 const benchmark = require('./2-benchmark.js');
 
-benchmark.do(10000000, 3, [
-  defineObject,
-  defineArray,
-  mixinObject,
-  newInstance,
-  newObject,
-  objectCreate,
-  callFactory
-]);
+function makeClosure(hello, size, flag) {
+  return () => {};
+}
+
+function closureInstance() {
+  return makeClosure('world', 100500, true);
+}
 
 function defineArray() {
-  return [
-    'world',
-    100500,
-    true
-  ];
+  return ['world', 100500, true];
+}
+
+function defineArrayOfString() {
+  return ['world', 'world', 'world'];
+}
+
+function defineArrayOfNumber() {
+  return [100500, 100500, 100500];
 }
 
 function defineObject() {
@@ -36,12 +38,26 @@ function mixinObject() {
   return obj;
 }
 
-function newInstance() {
-  return new Item(
-    'world',
-    100500,
-    true
-  );
+function ProtoItem(hello, size, flag) {
+  this.hello = hello;
+  this.size = size;
+  this.flag = flag;
+}
+
+function newPrototype() {
+  return new ProtoItem('world', 100500, true);
+}
+
+const ClassItem = class {
+  constructor(hello, size, flag) {
+    this.hello = hello;
+    this.size = size;
+    this.flag = flag;
+  }
+};
+
+function newClass() {
+  return new ClassItem('world', 100500, true);
 }
 
 function newObject() {
@@ -61,23 +77,23 @@ function objectCreate() {
 }
 
 function callFactory() {
-  return item(
-    'world',
-    100500,
-    true
-  );
+  return itemFactory('world', 100500, true);
 }
 
-function Item(hello, size, flag) {
-  this.hello = hello;
-  this.size = size;
-  this.flag = flag;
+function itemFactory(hello, size, flag) {
+  return { hello, size, flag };
 }
 
-function item(hello, size, flag) {
-  return {
-    hello,
-    size,
-    flag
-  };
-}
+benchmark.do(10000000, [
+  closureInstance,
+  defineObject,
+  defineArray,
+  defineArrayOfString,
+  defineArrayOfNumber,
+  mixinObject,
+  newPrototype,
+  newClass,
+  newObject,
+  objectCreate,
+  callFactory
+]);

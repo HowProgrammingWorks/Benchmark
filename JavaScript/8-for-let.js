@@ -17,7 +17,7 @@ function testForLet() {
   }
 }
 
-benchmark.do(1000000, 5, [
+benchmark.do(1000000, [
   testLetFor,
-  testForLet,
+  testForLet
 ]);
