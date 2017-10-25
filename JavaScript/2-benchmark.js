@@ -23,6 +23,11 @@ const optimize = fn => %OptimizeFunctionOnNextCall(fn);
 const rpad = (s, char, count) => (s + char.repeat(count - s.length));
 const lpad = (s, char, count) => (char.repeat(count - s.length) + s);
 
+const relativePercent = (best, time) => {
+  const relative = time * 100 / best;
+  const result = Math.round(Math.round(relative * 100) / 100) - 100;
+}
+
 console.log('\nname (heat) time opt after: define opt heat loop\n');
 
 benchmark.do = (count, tests) => {
@@ -42,20 +47,18 @@ benchmark.do = (count, tests) => {
     const diff = end[0] * 1e9 + end[1];
     const time = lpad(diff.toString(), '.', 15);
     const name = rpad(fn.name, '.', 25);
+    const iterations = result.length - PRE_COUNT;
     console.log(
-      name + '(' + (result.length - PRE_COUNT) + ')' +
-      time + ' nanoseconds ' + optCount(fn) + ' ' +
-      optBefore + ' ' + optAfter + ' ' +
-      optAfterHeat + ' ' + optAfterLoop
+      `${name} (${iterations}) ${time} nanoseconds ${optCount(fn)} ` +
+      `${optBefore} ${optAfter} ${optAfterHeat} ${optAfterLoop}`
     );
     return { name, time: diff };
   });
   console.log();
   const top = times.sort((t1, t2) => (t1.time - t2.time));
   const best = top[0].time;
-  const relative = (time) => (time * 100 / best);
   top.forEach((test) => {
-    test.percent = Math.round(Math.round(relative(test.time) * 100) / 100) - 100;
+    test.percent = relativePercent(best, test.time);
     const time = lpad(test.time.toString(), '.', 15);
     const percent = lpad((
       test.percent === 0 ? 'min' : '+' + test.percent + '%'

@@ -2,6 +2,13 @@
 
 const benchmark = require('../2-benchmark.js');
 
+const test0api = {
+  moduleName: {
+    submodule1: require('./lib0/submodule1'),
+    submodule2: require('./lib0/submodule2')
+  }
+};
+
 const test1api = {
   moduleName: {
     submodule1: require('./lib1/submodule1'),
@@ -21,9 +28,18 @@ test3api.moduleName = {};
 require('./lib3/submodule1')(test3api);
 require('./lib3/submodule2')(test3api);
 
+console.dir(test0api);
 console.dir(test1api);
 console.dir(test2api);
 console.dir(test3api);
+
+function exportObj() {
+  const a = test0api.moduleName.submodule1.first('Value');
+  const b = test0api.moduleName.submodule1.second(a);
+  const c = test0api.moduleName.submodule2.third(b);
+  const d = test0api.moduleName.submodule2.fourth(c);
+  return d;
+}
 
 function exportHash() {
   const a = test1api.moduleName.submodule1.first('Value');
@@ -49,7 +65,8 @@ function exportClosure() {
   return d;
 }
 
-benchmark.do(100000000, [
+benchmark.do(10000000, [
+  exportObj,
   exportHash,
   exportLink,
   exportClosure
