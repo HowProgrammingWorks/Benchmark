@@ -3,17 +3,17 @@
 const benchmark = {};
 module.exports = benchmark;
 
-const PRE_COUNT = 1000;
+const PRE_COUNT = 10000;
 
 const OPT_STATUS = [
-  /* 0*/ 'unknown',
-  /* 1*/ 'optimized',
-  /* 2*/ 'not optimized',
-  /* 3*/ 'always optimized',
-  /* 4*/ 'never optimized',
-  /* 5*/ 'unknown',
-  /* 6*/ 'maybe deoptimized',
-  /* 7*/ 'turbofan optimized'
+  /* 0 */ 'unknown',
+  /* 1 */ 'optimized',
+  /* 2 */ 'not optimized',
+  /* 3 */ 'always optimized',
+  /* 4 */ 'never optimized',
+  /* 5 */ 'unknown',
+  /* 6 */ 'maybe deoptimized',
+  /* 7 */ 'turbofan optimized'
 ];
 
 const OPT_BITS = [
@@ -35,7 +35,7 @@ const opt = fn => {
     if (n === 0) return;
     if (Math.pow(2, n) & optStatus) results.push(name);
   });
-  return  results.length ? results.join(',') : '---';
+  return results.length ? results.join(',') : '---';
 }
 
 const optimize = fn => %OptimizeFunctionOnNextCall(fn);
@@ -52,7 +52,8 @@ const relativePercent = (best, time) => {
 console.log('\nname time (nanoseconds) status: begin opt heat loop\n');
 
 benchmark.do = (count, tests) => {
-  const times = tests.map((fn) => {
+  const times = tests.map(fn => {
+    if (global.gc) gc();
     const result = [];
     let i;
     const optBefore = opt(fn);
