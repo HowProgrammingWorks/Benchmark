@@ -3,7 +3,7 @@
 const benchmark = require('./2-benchmark.js');
 
 function makeClosure(hello, size, flag) {
-  return () => {};
+  return () => ({ hello, size, flag });
 }
 
 function closureInstance() {
@@ -84,7 +84,7 @@ function itemFactory(hello, size, flag) {
   return { hello, size, flag };
 }
 
-benchmark.do(10000000, [
+benchmark.do(1000000, [
   closureInstance,
   defineObject,
   defineArray,
