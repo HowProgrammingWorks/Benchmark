@@ -6,18 +6,38 @@ module.exports = benchmark;
 const PRE_COUNT = 1000;
 
 const OPT_STATUS = [
-  /*0*/ '?', // unknown
-  /*1*/ '+', // optimized
-  /*2*/ '-', // not optimized
-  /*3*/ 'a', // always optimized
-  /*4*/ 'n', // never optimized
-  /*5*/ '?', // unknown,
-  /*6*/ 'm', // maybe deoptimized
-  /*7*/ 't'  // turbofan optimized
+  /* 0*/ 'unknown',
+  /* 1*/ 'optimized',
+  /* 2*/ 'not optimized',
+  /* 3*/ 'always optimized',
+  /* 4*/ 'never optimized',
+  /* 5*/ 'unknown',
+  /* 6*/ 'maybe deoptimized',
+  /* 7*/ 'turbofan optimized'
 ];
 
-const opt = fn => OPT_STATUS[%GetOptimizationStatus(fn)];
-const optCount = fn => %GetOptimizationCount(fn);
+const OPT_BITS = [
+  /*  1 */ 'function',
+  /*  2 */ 'never',
+  /*  4 */ 'always',
+  /*  8 */ 'maybe',
+  /* 16 */ 'opt',
+  /* 32 */ 'turbofan',
+  /* 64 */ 'interpreted'
+];
+
+const status = fn => %GetOptimizationStatus(fn);
+
+const opt = fn => {
+  const optStatus = status(fn);
+  const results = [];
+  OPT_BITS.forEach((name, n) => {
+    if (n === 0) return;
+    if (Math.pow(2, n) & optStatus) results.push(name);
+  });
+  return  results.length ? results.join(',') : 'not';
+}
+
 const optimize = fn => %OptimizeFunctionOnNextCall(fn);
 
 const rpad = (s, char, count) => (s + char.repeat(count - s.length));
@@ -26,9 +46,10 @@ const lpad = (s, char, count) => (char.repeat(count - s.length) + s);
 const relativePercent = (best, time) => {
   const relative = time * 100 / best;
   const result = Math.round(Math.round(relative * 100) / 100) - 100;
+  return result;
 }
 
-console.log('\nname (heat) time opt after: define opt heat loop\n');
+console.log('\nname time status: begin opt heat loop\n');
 
 benchmark.do = (count, tests) => {
   const times = tests.map((fn) => {
@@ -49,7 +70,7 @@ benchmark.do = (count, tests) => {
     const name = rpad(fn.name, '.', 25);
     const iterations = result.length - PRE_COUNT;
     console.log(
-      `${name} (${iterations}) ${time} nanoseconds ${optCount(fn)} ` +
+      `${name}${time} nanosec ` +
       `${optBefore} ${optAfter} ${optAfterHeat} ${optAfterLoop}`
     );
     return { name, time: diff };
