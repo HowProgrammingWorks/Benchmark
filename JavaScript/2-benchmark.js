@@ -35,7 +35,7 @@ const opt = fn => {
     if (n === 0) return;
     if (Math.pow(2, n) & optStatus) results.push(name);
   });
-  return  results.length ? results.join(',') : 'not';
+  return  results.length ? results.join(',') : '---';
 }
 
 const optimize = fn => %OptimizeFunctionOnNextCall(fn);
@@ -49,7 +49,7 @@ const relativePercent = (best, time) => {
   return result;
 }
 
-console.log('\nname time status: begin opt heat loop\n');
+console.log('\nname time (nanoseconds) status: begin opt heat loop\n');
 
 benchmark.do = (count, tests) => {
   const times = tests.map((fn) => {
@@ -70,8 +70,7 @@ benchmark.do = (count, tests) => {
     const name = rpad(fn.name, '.', 25);
     const iterations = result.length - PRE_COUNT;
     console.log(
-      `${name}${time} nanosec ` +
-      `${optBefore} ${optAfter} ${optAfterHeat} ${optAfterLoop}`
+      `${name}${time} ${optBefore} ${optAfter} ${optAfterHeat} ${optAfterLoop}`
     );
     return { name, time: diff };
   });
