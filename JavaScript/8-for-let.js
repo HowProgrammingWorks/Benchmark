@@ -2,7 +2,7 @@
 
 const benchmark = require('./2-benchmark.js');
 
-function testLetFor() {
+function testLetBeforeLoop() {
   const a = Array(1000);
   let i;
   for (i = 0; i < 1000; i++) {
@@ -10,7 +10,7 @@ function testLetFor() {
   }
 }
 
-function testForLet() {
+function testLetInLoop() {
   const a = Array(1000);
   for (let i = 0; i < 1000; i++) {
     a[i] = i;
@@ -18,6 +18,6 @@ function testForLet() {
 }
 
 benchmark.do(1000000, [
-  testLetFor,
-  testForLet
+  testLetInLoop,
+  testLetBeforeLoop
 ]);
