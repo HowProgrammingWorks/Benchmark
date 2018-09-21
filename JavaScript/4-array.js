@@ -56,7 +56,7 @@ function buildGetter(proto, fieldName, fieldType, fieldIndex) {
         return new Date(this[fieldIndex]);
       }
     });
-  } else if (typeof(fieldType) === 'function') {
+  } else if (typeof fieldType === 'function') {
     Object.defineProperty(proto, fieldName, { get: fieldType });
   } else {
     Object.defineProperty(proto, fieldName, {

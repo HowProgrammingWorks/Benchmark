@@ -2,14 +2,13 @@
 
 const LOOP_COUNT = 50000;
 
-function fn() {
+const fn = () => {
   const a = [];
-  let i;
-  for (i = 0; i < LOOP_COUNT; i++) {
+  for (let i = 0; i < LOOP_COUNT; i++) {
     a.push(Array(i).join('A').length);
   }
   return a;
-}
+};
 
 console.time('experiment');
 const res1 = fn();

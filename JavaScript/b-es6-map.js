@@ -19,48 +19,47 @@ const citiesOld = {
   Riga:    { name: 'Рига',   population:   643615 }
 };
 
-function testForInHash() {
+const testForInHash = () => {
   const arr = [];
-  let key;
-  for (key in citiesOld) {
+  for (const key in citiesOld) {
     arr.push([ citiesOld[key], key ]);
   }
-}
+};
 
-function testForEach() {
+const testForEach = () => {
   const arr = [];
   cities.forEach((value, key) => {
     arr.push([ value, key ]);
   });
-}
+};
 
-function testForOf() {
+const testForOf = () => {
   const arr = [];
-  for (let [key, value] of cities) {
+  for (const [key, value] of cities) {
     arr.push([ value, key ]);
   }
-}
+};
 
-function testForOfKeys() {
+const testForOfKeys = () => {
   const arr = [];
-  for (let key of cities.keys()) {
+  for (const key of cities.keys()) {
     arr.push(key);
   }
-}
+};
 
-function testForOfValues() {
+const testForOfValues = () => {
   const arr = [];
-  for (let value of cities.values()) {
+  for (const value of cities.values()) {
     arr.push(value);
   }
-}
+};
 
-function testForOfEntries() {
+const testForOfEntries = () => {
   const arr = [];
-  for (let [key, value] of cities.entries()) {
+  for (const [key, value] of cities.entries()) {
     arr.push([ key, value ]);
   }
-}
+};
 
 benchmark.do(1000000, [
   testForInHash,

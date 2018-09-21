@@ -3,8 +3,11 @@
 const benchmark = require('./2-benchmark.js');
 
 const fnLambdaBlock = () => {};
+// eslint-disable-next-line
 const fnLambdaBlockU = () => { return; };
+// eslint-disable-next-line
 const fnLambdaBlockN = () => { return null; };
+// eslint-disable-next-line
 const fnLambdaBlock0 = () => { return 0; };
 
 const fnLambdaExprU = () => undefined;

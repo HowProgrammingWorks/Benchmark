@@ -55,35 +55,35 @@ benchmark.do = (count, tests) => {
   const times = tests.map(fn => {
     if (global.gc) gc();
     const result = [];
-    let i;
     const optBefore = opt(fn);
     optimize(fn);
     fn();
     const optAfter = opt(fn);
-    for (i = 0; i < PRE_COUNT; i++) result.push(fn());
+    for (let i = 0; i < PRE_COUNT; i++) result.push(fn());
     const optAfterHeat = opt(fn);
     const begin = process.hrtime();
-    for (i = 0; i < count; i++) result.push(fn());
+    for (let i = 0; i < count; i++) result.push(fn());
     const end = process.hrtime(begin);
     const optAfterLoop = opt(fn);
     const diff = end[0] * 1e9 + end[1];
-    const time = lpad(diff.toString(), '.', 15);
+    const time = diff.toString();
     const name = rpad(fn.name, '.', 25);
     const iterations = result.length - PRE_COUNT;
-    console.log(
-      `${name}${time} ${optBefore} ${optAfter} ${optAfterHeat} ${optAfterLoop}`
-    );
+    const log = [
+      name, time, optBefore, optAfter,
+      optAfterHeat, optAfterLoop
+    ];
+    console.log(log.join(' '));
     return { name, time: diff };
   });
   console.log();
   const top = times.sort((t1, t2) => (t1.time - t2.time));
   const best = top[0].time;
-  top.forEach((test) => {
+  top.forEach(test => {
     test.percent = relativePercent(best, test.time);
     const time = lpad(test.time.toString(), '.', 15);
-    const percent = lpad((
-      test.percent === 0 ? 'min' : '+' + test.percent + '%'
-    ), '.', 10);
-    console.log(test.name + time + percent);
+    const percent = test.percent === 0 ? 'min' : `+${test.percent}%`;
+    const line = lpad(percent, '.', 10);
+    console.log(test.name + time + line);
   });
 };

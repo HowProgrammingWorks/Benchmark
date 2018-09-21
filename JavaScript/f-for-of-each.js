@@ -10,39 +10,39 @@ const data2 = [
   'Descartes', 'Pascal', 'Leibniz', 'Euler', 'Bernoulli', 'Kepler'
 ];
 
-function testEachNumber() {
+const testEachNumber = () => {
   const a = Array(data1.length);
   data1.forEach((item, i) => {
     a[i] = data1[i];
   });
   return a;
-}
+};
 
-function testForOfNumber() {
+const testForOfNumber = () => {
   const a = Array(data1.length);
   let i = 0;
-  for (let n of data1) {
+  for (const n of data1) {
     a[i++] = n;
   }
   return a;
-}
+};
 
-function testEachString() {
+const testEachString = () => {
   const a = Array(data2.length);
   data2.forEach((item, i) => {
     a[i] = data2[i];
   });
   return a;
-}
+};
 
-function testForOfString() {
+const testForOfString = () => {
   const a = Array(data2.length);
   let i = 0;
-  for (let s of data2) {
+  for (const s of data2) {
     a[i++] = s;
   }
   return a;
-}
+};
 
 benchmark.do(5000000, [
   testEachNumber,
