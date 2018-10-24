@@ -7,13 +7,13 @@ const PRE_COUNT = 10000;
 
 const OPT_STATUS = [
   /* 0 */ 'unknown',
-  /* 1 */ 'optimized',
-  /* 2 */ 'not optimized',
-  /* 3 */ 'always optimized',
-  /* 4 */ 'never optimized',
+  /* 1 */ 'opt',
+  /* 2 */ 'not opt',
+  /* 3 */ 'always opt',
+  /* 4 */ 'never opt',
   /* 5 */ 'unknown',
-  /* 6 */ 'maybe deoptimized',
-  /* 7 */ 'turbofan optimized'
+  /* 6 */ 'maybe deopt',
+  /* 7 */ 'turbofan opt'
 ];
 
 const OPT_BITS = [
@@ -35,7 +35,7 @@ const opt = fn => {
     if (n === 0) return;
     if (Math.pow(2, n) & optStatus) results.push(name);
   });
-  return results.length ? results.join(',') : '---';
+  return results.length ? results.join(', ') : 'no preopt,';
 }
 
 const optimize = fn => %OptimizeFunctionOnNextCall(fn);
@@ -43,11 +43,7 @@ const optimize = fn => %OptimizeFunctionOnNextCall(fn);
 const rpad = (s, char, count) => (s + char.repeat(count - s.length));
 const lpad = (s, char, count) => (char.repeat(count - s.length) + s);
 
-const relativePercent = (best, time) => {
-  const relative = time * 100 / best;
-  const result = Math.round(Math.round(relative * 100) / 100) - 100;
-  return result;
-}
+const relativePercent = (best, time) => (time * 100n / best) - 100n;
 
 console.log('\nname time (nanoseconds) status: begin opt heat loop\n');
 
@@ -61,17 +57,15 @@ benchmark.do = (count, tests) => {
     const optAfter = opt(fn);
     for (let i = 0; i < PRE_COUNT; i++) result.push(fn());
     const optAfterHeat = opt(fn);
-    const begin = process.hrtime();
+    const begin = process.hrtime.bigint();
     for (let i = 0; i < count; i++) result.push(fn());
-    const end = process.hrtime(begin);
+    const end = process.hrtime.bigint();
     const optAfterLoop = opt(fn);
-    const diff = end[0] * 1e9 + end[1];
-    const time = diff.toString();
+    const diff = end - begin;
     const name = rpad(fn.name, '.', 25);
     const iterations = result.length - PRE_COUNT;
     const log = [
-      name, time, optBefore, optAfter,
-      optAfterHeat, optAfterLoop
+      name, diff, optBefore, optAfter, optAfterHeat, optAfterLoop
     ];
     console.log(log.join(' '));
     return { name, time: diff };
@@ -82,7 +76,7 @@ benchmark.do = (count, tests) => {
   top.forEach(test => {
     test.percent = relativePercent(best, test.time);
     const time = lpad(test.time.toString(), '.', 15);
-    const percent = test.percent === 0 ? 'min' : `+${test.percent}%`;
+    const percent = test.percent === 0 ? 'min' : test.percent + '%';
     const line = lpad(percent, '.', 10);
     console.log(test.name + time + line);
   });
