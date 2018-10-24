@@ -19,7 +19,7 @@ const data1 = [
     city: 'Shaoshan' },
   { name: 'Rene Descartes',
     birth: new Date('1596-03-31'),
-    city: 'La Haye en Touraine' }
+    city: 'La Haye en Touraine' },
 ];
 
 const data2 = [
@@ -67,7 +67,8 @@ function buildGetter(proto, fieldName, fieldType, fieldIndex) {
   }
 }
 
-data2.forEach(person => person.__proto__ = Person.prototype);
+data2.forEach(person => Object.setPrototypeOf(person, Person.prototype));
+//data2.forEach(person => person.__proto__ = Person.prototype);
 
 // Define query
 

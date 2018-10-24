@@ -23,7 +23,7 @@ const OPT_BITS = [
   /*  8 */ 'maybe',
   /* 16 */ 'opt',
   /* 32 */ 'turbofan',
-  /* 64 */ 'interpreted'
+  /* 64 */ 'interp'
 ];
 
 const status = fn => %GetOptimizationStatus(fn);
@@ -62,7 +62,7 @@ benchmark.do = (count, tests) => {
     const end = process.hrtime.bigint();
     const optAfterLoop = opt(fn);
     const diff = end - begin;
-    const name = rpad(fn.name, '.', 25);
+    const name = rpad(fn.name, '.', 22);
     const iterations = result.length - PRE_COUNT;
     const log = [
       name, diff, optBefore, optAfter, optAfterHeat, optAfterLoop
@@ -75,7 +75,7 @@ benchmark.do = (count, tests) => {
   const best = top[0].time;
   top.forEach(test => {
     test.percent = relativePercent(best, test.time);
-    const time = lpad(test.time.toString(), '.', 15);
+    const time = lpad(test.time.toString(), '.', 10);
     const percent = test.percent === 0 ? 'min' : test.percent + '%';
     const line = lpad(percent, '.', 10);
     console.log(test.name + time + line);
