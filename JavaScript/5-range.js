@@ -1,6 +1,8 @@
 'use strict';
 
 const benchmark = require('./2-benchmark.js');
+const common = require('metarhia-common');
+const os = require('os');
 
 const rangePush = (min, max) => {
   const arr = [];
@@ -24,14 +26,14 @@ const rangeEx = range => {
   const toType = typeof to;
   if (toType === 'undefined') {
     to = range[2];
-    return api.common.range(from, to);
+    return common.range(from, to);
   } else if (toType !== 'number') {
     let count = to[0];
     if (count < 0) {
-      const cpus = api.os.cpus().length;
+      const cpus = os.cpus().length;
       count = cpus + count;
     }
-    return api.common.range(from, from + count - 1);
+    return common.range(from, from + count - 1);
   }
 };
 
@@ -43,6 +45,6 @@ benchmark.do(1000000, [
     rangeNew(1, 1000);
   },
   function testRangeEx() {
-    rangeNew(1, 1000);
+    rangeEx([1, [1000]]);
   },
 ]);
