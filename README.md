@@ -1,6 +1,8 @@
 # Измерение производительности кода и оптимизация
 ===============
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/sanq2X7Re8o/0.jpg)](https://www.youtube.com/watch?v=sanq2X7Re8o)
+
 ## Оптимизация
 - Объекты одинаковой структуры
 - Функции одинаковой формы (мономорфные)
