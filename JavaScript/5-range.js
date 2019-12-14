@@ -43,6 +43,6 @@ benchmark.do(1000000, [
     rangeNew(1, 1000);
   },
   function testRangeEx() {
-    rangeNew(1, 1000);
+    rangeEx(1, 1000);
   },
 ]);
