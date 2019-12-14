@@ -29,6 +29,15 @@ const testForIn = () => {
   }
 };
 
+const testForEach = () => {
+  const a = Array(7);
+  let i = 0;
+  const keys = Object.keys(data);
+  keys.forEach(key => {
+    a[i++] = data[key];
+  });
+};
+
 const testForOf = () => {
   const a = Array(7);
   let i = 0;
@@ -42,5 +51,6 @@ const testForOf = () => {
 benchmark.do(10000000, [
   testForKeys,
   testForIn,
+  testForEach,
   testForOf,
 ]);
