@@ -71,9 +71,10 @@ benchmark.do = (count, tests) => {
     return { name, time: diff };
   });
   console.log();
-  const top = times.sort((t1, t2) => (t1.time - t2.time));
+  console.log(times);
+  const top = times.sort((t1, t2) => t1.time > t2.time ? 1 : -1);
   const best = top[0].time;
-  top.forEach(test => {
+  times.forEach(test => {
     test.percent = relativePercent(best, test.time);
     const time = lpad(test.time.toString(), '.', 10);
     const percent = test.percent === 0 ? 'min' : test.percent + '%';
