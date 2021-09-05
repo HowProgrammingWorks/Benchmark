@@ -9,8 +9,7 @@
     "ecmaVersion": 2020
   },
   "globals": {
-    "BigInt": true,
-    "api": true
+    "BigInt": true
   },
   "rules": {
     "indent": [
@@ -29,7 +28,6 @@
       "error",
       "always"
     ],
-    "no-console": "off",
     "no-loop-func": [
       "error"
     ],
@@ -215,7 +213,7 @@
     ],
     "arrow-parens": [
       "error",
-      "as-needed"
+      "always"
     ],
     "arrow-body-style": [
       "error",
