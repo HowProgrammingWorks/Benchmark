@@ -67,12 +67,12 @@ function buildGetter(proto, fieldName, fieldType, fieldIndex) {
   }
 }
 
-data2.forEach(person => Object.setPrototypeOf(person, Person.prototype));
+data2.forEach((person) => Object.setPrototypeOf(person, Person.prototype));
 //data2.forEach(person => person.__proto__ = Person.prototype);
 
 // Define query
 
-const query = person => (
+const query = (person) => (
   person.name !== '' &&
   person.age > 18 &&
   person.city === 'Rome'

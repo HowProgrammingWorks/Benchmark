@@ -18,7 +18,7 @@ const rangeNew = (from, to) => {
   return range;
 };
 
-const rangeEx = range => {
+const rangeEx = (range) => {
   const from = range[0];
   let to = range[1];
   const toType = typeof to;
