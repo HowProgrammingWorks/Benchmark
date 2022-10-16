@@ -33,7 +33,7 @@ const testForEach = () => {
   const a = Array(7);
   let i = 0;
   const keys = Object.keys(data);
-  keys.forEach(key => {
+  keys.forEach((key) => {
     a[i++] = data[key];
   });
 };
