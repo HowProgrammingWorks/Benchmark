@@ -66,7 +66,7 @@ function buildGetter(proto, fieldName, fieldType, fieldIndex) {
     });
   }
 }
-
+data1.forEach((person) => Object.setPrototypeOf(person, Person.prototype));
 data2.forEach((person) => Object.setPrototypeOf(person, Person.prototype));
 //data2.forEach(person => person.__proto__ = Person.prototype);
 
