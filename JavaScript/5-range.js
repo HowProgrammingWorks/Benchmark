@@ -33,6 +33,7 @@ const rangeEx = (range) => {
     }
     return api.common.range(from, from + count - 1);
   }
+  return [];
 };
 
 benchmark.do(1000000, [

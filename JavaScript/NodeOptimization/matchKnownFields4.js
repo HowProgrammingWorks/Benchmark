@@ -79,6 +79,7 @@ function fieldKnown(field) {
   case 'X-Forwarded-Proto':
   case 'x-forwarded-proto': return '\u0000x-forwarded-proto';
   }
+  return '';
 }
 
 function lowerKnown(field) {
@@ -121,6 +122,7 @@ function lowerKnown(field) {
   case 'x-forwarded-host': return '\u0000x-forwarded-host';
   case 'x-forwarded-proto': return '\u0000x-forwarded-proto';
   }
+  return '';
 }
 
 function matchKnownFields4(field) {
